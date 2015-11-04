@@ -9,7 +9,7 @@
 <meta name="author" content="">
 <link rel="icon" type="image/jpg" href="img/berea_logo.jpg" class="img-circle">
 
-<title>Berea College || Curriculum Library</title>
+<title>Berea College || Faculty Development</title>
 
 
 <!-- Bootstrap core CSS -->
@@ -34,7 +34,7 @@
 
 <div class="container">
 <div class="header clearfix">
-<h3 class="text-primary">Berea College Curriculum Plan Library</h3>
+<h3 class="text-primary">Berea College Faculty Development</h3>
 </div>
 
 <br><br><br>
