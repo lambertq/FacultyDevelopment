@@ -13,11 +13,11 @@
 
 
 <!-- Bootstrap core CSS -->
-<link href="boot/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="boot/css/signin.css" rel="stylesheet">
-<link href="boot/css/bootstrap.css" rel="stylesheet">
+<link href="bootstrap/css/signin.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]
