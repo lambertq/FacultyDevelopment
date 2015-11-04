@@ -1339,6 +1339,8 @@ mark,
 }
 .text-primary {
   color: #337ab7;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
 }
 a.text-primary:hover,
 a.text-primary:focus {
@@ -6796,5 +6798,15 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+.form-signin{
+
+  width: 300px
+}
+
+.log{
+  margin-top: 20px;
+  margin-left: 20px;
 }
 /*# sourceMappingURL=bootstrap.css.map */

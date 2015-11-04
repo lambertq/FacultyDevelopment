@@ -40,7 +40,7 @@
 <br><br><br>
 
 <center>
-<form class="form-signin" action="auth.php" method="post" >
+<form class="form-signin" action="homestyles.php" method="post" >
 <h2 class="form-signin-heading">Please sign in</h2>
 <label for="inputEmail" class="sr-only">Email address</label>
 <input type="text" id="inputText" class="form-control" placeholder="Username" name="username" required autofocus><br>
