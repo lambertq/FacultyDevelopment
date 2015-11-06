@@ -40,7 +40,7 @@
             <li role="presentation"><a href="#">Contact</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Project name</h3>
+        <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
       <div class="jumbotron">
@@ -59,53 +59,52 @@
 		<!--end row 1-->
 		<!--begin row 2-->
 		<tr><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "View All Faculty" name = "PageChange"/>
+				<CENTER><input type="Submit" value = "View All Faculty" name = "PageChange"/></CENTER>
 				</form>
 		</th><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "View All Activities" name = "PageChange"/>
+				<CENTER><input type="Submit" value = "View All Activities" name = "PageChange"/></CENTER>
 				</form>
 		</th></tr>
 		<!--end row 2-->
 		<!--begin row 3-->
 		<tr><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Add Faculty" name = "PageChange"/> 
+				<CENTER><input type="Submit" value = "Add Faculty" name = "PageChange"/></CENTER>
 				</form>
 		</th><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Add Activities" name = "PageChange"/>
+				<CENTER><input type="Submit" value = "Add Activities" name = "PageChange"/></CENTER>
 				</form>
 		</th></tr>
 		<!--end row 3-->
 		<!--begin row 4-->
 		<tr><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Edit Faculty" name = "PageChange"/> 
+				<CENTER><input type="Submit" value = "Edit Faculty" name = "PageChange"/></CENTER>
 				</form>
 		</th><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Edit Activities" name = "PageChange"/>
+				<CENTER><input type="Submit" value = "Edit Activities" name = "PageChange"/><CENTER>
 				</form>
 		</th></tr>
 		<!--end row 4-->
 		<!--begin row 5-->
 		<tr><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Remove Faculty" name = "PageChange"/> 
+				<CENTER><input type="Submit" value = "Remove Faculty" name = "PageChange"/></CENTER>
 				</form>
 		</th><th><form action = "singlesearch.php" method = "post">
-				<input type="Submit" value = "Remove Activities" name = "PageChange"/>
+				<CENTER><input type="Submit" value = "Remove Activities" name = "PageChange"/></CENTER>
 				</form>
 		</th></tr>
 		<!--end row 5-->
 
 		</tbody></table>
-		<form action = "http://tango.berea.edu/lambertq/FacultyDB/advancedsearch/advsearch.php" method = "post">
-				<input type="Submit" value = "Advanced Search" name = "PageChange"/>
-				</form>
+		
 	
 		</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        <p><a class="btn btn-lg btn-success" href="http://tango.berea.edu/lambertq/FacultyDB/advancedsearch/advsearch.php" role="button">Advanced Search</a>
+		<a class="btn btn-lg btn-success" href="http://tango.berea.edu/lambertq/FacultyDB/advancedsearch/advsearch.php" role="button">Add to Event</a></p>
       </div>
 </CENTER>
 
       <footer class="footer">
-        <p>&copy; Company 2014</p>
+        <p>&copy; Computer Science 330 Faculty Development Team Fall 2015</p>
       </footer>
 
     </div> <!-- /container -->
