@@ -35,9 +35,9 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+            <li role="presentation" class="active"><a href="homestyles.php">Home</a></li>
+            <!--<li role="presentation"><a href="#">About</a></li>-->
+            <!--<li role="presentation"><a href="#">Contact</a></li>-->
           </ul>
         </nav>
         <h3 class="text-muted">Faculty Development</h3>
@@ -46,8 +46,9 @@
       <div class="jumbotron">
         <h1>Home Directory</h1>
         <p class="lead">
-		<table border=2><tbody>
-		<tr><th> <h3><CENTER>Faculty</CENTER></h3> </th><th> <h3><CENTER>Activity</CENTER></h3> </th></tr>
+		
+		<table border=5><tbody>
+		<tr><th> <h3><CENTER><b>Faculty</b></CENTER></h3> </th><th> <h3><CENTER><b>Activity</b></CENTER></h3> </th></tr>
 		<!--begin row 1-->
 		<tr><th><form action = "singlesearch.php" method = "post">
 				 <input type="Submit" value = "Faculty Single Search" name = "PageChange"/>
@@ -98,8 +99,8 @@
 		
 	
 		</p>
-        <p><a class="btn btn-lg btn-success" href="http://tango.berea.edu/lambertq/FacultyDB/advancedsearch/advsearch.php" role="button">Advanced Search</a>
-		<a class="btn btn-lg btn-success" href="http://tango.berea.edu/lambertq/FacultyDB/advancedsearch/advsearch.php" role="button">Add to Event</a></p>
+        <p><a class="btn btn-lg btn-success" href="advsearch.php" role="button">Advanced Search</a>
+		<a class="btn btn-lg btn-success" href="advsearch.php" role="button">Add to Event</a></p>
       </div>
 </CENTER>
 
