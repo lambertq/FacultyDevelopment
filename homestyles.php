@@ -1,14 +1,15 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="description" content="Yo">
+    <meta name="author" content="Quinten">
+    <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
     <title>Faculty Tracking</title>
 
@@ -28,7 +29,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
+  
   <body>
 
     <div class="container">
@@ -46,7 +47,7 @@
       <div class="jumbotron">
         <h1>Home Directory</h1>
         <p class="lead">
-		
+		<CENTER>
 		<table border=5><tbody>
 		<tr><th> <h3><CENTER><b>Faculty</b></CENTER></h3> </th><th> <h3><CENTER><b>Activity</b></CENTER></h3> </th></tr>
 		<!--begin row 1-->
@@ -59,6 +60,7 @@
 		</th></tr>
 		<!--end row 1-->
 		<!--begin row 2-->
+		
 		<tr><th><form action = "singlesearch.php" method = "post">
 				<CENTER><input type="Submit" value = "View All Faculty" name = "PageChange"/></CENTER>
 				</form>
@@ -97,7 +99,7 @@
 
 		</tbody></table>
 		
-	
+		</CENTER>
 		</p>
         <p><a class="btn btn-lg btn-success" href="advsearch.php" role="button">Advanced Search</a>
 		<a class="btn btn-lg btn-success" href="advsearch.php" role="button">Add to Event</a></p>

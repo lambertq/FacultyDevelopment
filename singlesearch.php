@@ -1,3 +1,4 @@
+
 <html>
 <body>
 <head>
@@ -5,11 +6,12 @@
 <CENTER>
 <h1> Single Search Page </h1>
 <?php
+	
 	$homeclick = $_POST['PageChange'];
 	if ($homeclick == "Faculty Single Search"):
 		echo ("Faculty Single Search");
 		//insert query that grabs everything from the faculty table
-		//$query = ("SELECT * FROM Faculty");
+		$query = ("SELECT * FROM Person");
 		//populate drop down list with all faculty in the database by name
 		?><!--end php and start the form for the drop down-->
 		<form action = "singleresult.php" method = "post">
