@@ -61,10 +61,10 @@
 		<!--end row 1-->
 		<!--begin row 2-->
 		
-		<tr><th><form action = "singlesearch.php" method = "post">
+		<tr><th><form action = "singleresult.php" method = "post">
 				<CENTER><input type="Submit" value = "View All Faculty" name = "PageChange"/></CENTER>
 				</form>
-		</th><th><form action = "singlesearch.php" method = "post">
+		</th><th><form action = "singleresult.php" method = "post">
 				<CENTER><input type="Submit" value = "View All Activities" name = "PageChange"/></CENTER>
 				</form>
 		</th></tr>
