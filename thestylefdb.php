@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Yo">
-    <meta name="author" content="Quinten">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
     <title>Faculty Tracking</title>
@@ -44,8 +44,8 @@
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
+	<h1>Home Directory</h1>
       <div class="jumbotron">
-        <h1>Home Directory</h1>
         <p class="lead">
 		<!----------------------->
 		<!----------------------->

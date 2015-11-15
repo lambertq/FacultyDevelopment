@@ -47,68 +47,73 @@ or die(mysql_connect_error("Connection Failed"));
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
+	<h1>Single Search</h1>
       <div class="jumbotron">
-        <h1>Single Search</h1>
         <p class="lead">
 		<?php
-	$homeclick = $_POST['PageChange'];
+		error_reporting(0);
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
+		if (isset($_POST['PageChange'])){//checks if came from homepage
+		
+			$homeclick = $_POST['PageChange'];//holds the value that tells the page what to show to the user. 
+			if ($homeclick == "Faculty Single Search"):
+				//echo ("Faculty Single Search");
+				//insert query that grabs everything from the faculty table
+				$query = $link -> query ("SELECT * FROM faculty");
+				//populate drop down list with all faculty in the database by name
+				?><!--end php and start the form for the drop down-->
+				<form action = "singleresult.php" method = "post">
+				<h4>Faculty Member:</h4> <select name="fsel">
+				<?php
+				while($row = $query -> fetch_array()){
+					$name = ("".$row['firstname']." ".$row['mi']." ".$row['lastname']."");
+					echo "<option value='" . $row['bnumber'] . "'>" . $name . "</option>";
+				}
+				?>
+				</select>
+				<input type = "submit" />
+				</form>
+				<?php
+			
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
+			elseif ($homeclick == "Activity Single Search"):
+				//insert query that grabs everything from the activity table
+				$query = $link -> query ("SELECT * FROM Activities_t");
+				//populate drop down list with all activities in the database by name
+				?><!--end php and start the form for the drop down-->
+				<form action = "singleresult.php" method = "post">
+				<h4>Activity:</h4> <select name="asel">
+				<?php
+				while($row = $query -> fetch_array()){
+					echo "<option value='" . $row['ID'] . "'>" . $row['Title'] . "</option>";
+				}
+				?>
+				</select>
+				<input type = "submit" />
+				</form>
+				<?php
+				
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//
+			else: //this should no longer run but it is still here just in case something breaks
+				echo ("Page not created yet. Still under construction.");
+            //////////////////////////////////////////////////////		
+			endif; //ends the if statement all the way down here//
+		}   //////////////////////////////////////////////////////
+		
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
+		else{//if didn't come from homepage
+			echo "<h3>Invalid Access Route.<br /> Please click the home button to return to the home page.</h3>";
+		}
 	
-	if ($homeclick == "Faculty Single Search"):
-		//echo ("Faculty Single Search");
-		//insert query that grabs everything from the faculty table
-		$query = $link -> query ("SELECT * FROM Faculty_Placeholder");
-		//populate drop down list with all faculty in the database by name
-		?><!--end php and start the form for the drop down-->
-		<form action = "singleresult.php" method = "post">
-		<h4>Faculty Member:</h4> <select name="selection">
-		<?php
-		while($row = $query -> fetch_array()){
-			echo "<option value='" . $row['ID'] . "'>" . $row['Name'] . "</option>";
-		}
-		?>
-		</select>
-		<input type = "submit" />
-		</form>
-		<?php
-		//store user selection in a post operation
-		//direct the user to the results page to get their results for their search
-		
-	elseif ($homeclick == "Activity Single Search"):
-		//insert query that grabs everything from the activity table
-		$query = $link -> query ("SELECT * FROM Activities_t");
-		//populate drop down list with all activities in the database by name
-		?><!--end php and start the form for the drop down-->
-		<form action = "singleresult.php" method = "post">
-		<h4>Activity:</h4> <select name="selection">
-		<?php
-		while($row = $query -> fetch_array()){
-			echo "<option value='" . $row['ID'] . "'>" . $row['Title'] . "</option>";
-		}
-		?>
-		</select>
-		<input type = "submit" />
-		</form>
-		<?php
-		//store user selection in a post operation
-		//direct the user to the results page to get their results for their search
-		
-	elseif ($homeclick == "View All Faculty"):
-		echo ("All Faculty");
-		$query = $link -> query ("SELECT * FROM Faculty_Placeholder");
-		header('Refresh: 0; URL=http://tango.berea.edu/lambertq/FacultyDB/singleresult.php');
-		//insert query that grabs everything from the faculty table
-		//direct the user to the results page to display the entire table to the user
-		
-	elseif ($homeclick == "View All Activities"):
-		echo ("All Activies");
-		$query = $link -> query ("SELECT * FROM Activities_t");
-		header('Refresh: 1; URL=http://tango.berea.edu/lambertq/FacultyDB/singleresult.php');
-		//insert query that grabs everything from the activity table
-		//direct the user to the results page to display the entire table to the user
-	else:
-		echo ("Page not created yet. Still under construction.");
-	endif;
-?>
+	?>
       </div>
 </CENTER>
 
