@@ -10,6 +10,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
+	
+	<?php include('session.php');?>
+<div class="log"><b>Welcome  <?php echo $login_session; ?>. You're logged in.</b></div>
+
 
     <title>Faculty Tracking</title>
 
@@ -37,6 +41,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="homestyles.php">Home</a></li>
+			<li role="presentation" class="active"><a href="logout.php">Log Out</a></li>
             <!--<li role="presentation"><a href="#">About</a></li>-->
             <!--<li role="presentation"><a href="#">Contact</a></li>-->
           </ul>
