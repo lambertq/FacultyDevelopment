@@ -1,5 +1,10 @@
-
 <!DOCTYPE html>
+
+<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
 
 <html lang="en">
   <head>
@@ -7,11 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Yo">
+    <meta name="author" content="Quinten">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
-    <title>Faculty Tracking</title>
+    <title>Delete a Faculty</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,15 +50,33 @@
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
-	<h1>Home Directory</h1>
-      <div class="jumbotron">
-        <p class="lead">
-		
-		
-		
-		
-      </div>
-</CENTER>
+<h1> Delete a Faculty: </h1>
+<div class="jumbotron">
+			<p class="lead">
+	<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+		or die(mysql_connect_error("Connection Failed"));
+		$a_opt = $link -> query("SELECT * FROM faculty");
+	?>
+	<CENTER>
+	
+	<table border=1><tbody>
+	<form action = "DelFacResult.php" method = "post">
+		A Faculty: <select name="f_ID" required>
+			<option value="" selected = "selected" disabled = "disabled">Choose Faculty to DELETE</option>
+	
+			<?php
+				while($row = mysqli_fetch_array($a_opt)) {
+				 echo "<option value='" . $row['ID'] . "'>" . $row['firstname'] . " " . $row['lastname'] . "</option>";
+				}
+			?>
+		</select>
+		<br />
+		<br />
+		<input class="btn-group btn-danger btn-sm" type = "Submit" value = "DELETE" />
+	</form>
+	</table></tbody>
+	</CENTER>
+</div>
 
       <footer class="footer">
         <p>&copy; Computer Science 330 Faculty Development Team Fall 2015</p>

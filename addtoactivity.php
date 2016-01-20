@@ -1,5 +1,16 @@
+<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+or die(mysql_connect_error("Connection Failed"));
+?>
 
 <!DOCTYPE html>
+
+
+<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
+
 
 <html lang="en">
   <head>
@@ -45,13 +56,30 @@
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
-	<h1>Home Directory</h1>
+	<h1>Manage Faculty Attendance</h1>
       <div class="jumbotron">
         <p class="lead">
+				<?php
+		error_reporting(0);
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//
 		
-		
-		
-		
+		$aq = $link -> query ("SELECT * FROM Activities_t");	
+		?><!--end php and start the form for the drop down-->
+		<form action = "manageattendence.php" method = "post">
+
+		<h4>Choose an Activity to add or delete Faculty from:</h4> <select name="aid" required>
+		<option value="" selected = "selected" disabled = "disabled">Choose the Attended Activity</option>
+		<?php
+		while($row = $aq -> fetch_array()){
+			echo "<option value='" . $row['ID'] . "'>" . $row['Title'] . "</option>";
+		}
+		?>
+		</select><br /><br />
+		<input class="btn-group btn-primary btn-sm" type = "Submit">
+		</form>
+
       </div>
 </CENTER>
 
@@ -66,3 +94,4 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+

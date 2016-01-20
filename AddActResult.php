@@ -1,5 +1,10 @@
-
 <!DOCTYPE html>
+
+<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
 
 <html lang="en">
   <head>
@@ -7,11 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Yo">
+    <meta name="author" content="Quinten">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
-    <title>Faculty Tracking</title>
+    <title>Add Activity</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,14 +50,64 @@
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
-	<h1>Home Directory</h1>
-      <div class="jumbotron">
+<div class="jumbotron">
         <p class="lead">
-		
-		
-		
-		
-      </div>
+<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+or die(mysql_connect_error("Connection Failed"));
+if(isset($_POST['a_title'])){
+	$name = $_POST["a_title"];
+	$date = $_POST["a_date"];
+	$time = $_POST["a_time"];
+	$loc = $_POST["a_loc"];
+	$type = $_POST["a_type"];
+	$goal = $_POST["a_goal"];
+	$desc = $_POST["a_desc"];
+	if(isset($_POST['a_narr'])){
+		$narr = $_POST["a_narr"];
+		$add = $link -> query("INSERT INTO Activities_t (Title, Date, Time, Location, Type, Goal, Description, Narrative) VALUES( '$name', '$date', '$time', '$loc', '$type', '$goal', '$desc', '$narr')");
+	}
+	else{
+	$add = $link -> query("INSERT INTO Activities_t (Title, Date, Time, Location, Type, Goal, Description) VALUES( '$name', '$date', '$time', '$loc', '$type', '$goal', '$desc')");
+	}
+	if (!$add){
+		echo "Did not work";
+	}
+	else{
+		echo "ACTIVITY successfully added to the database";
+	}
+}
+elseif(isset($_POST['n_loc'])){
+	$add = $link -> query("INSERT INTO location_t (name) VALUES('".$_POST['n_loc']."')");
+	if (!$add){
+		echo "Did not work";
+	}
+	else{
+		echo "New activity LOCATION successfully added to the database";
+	}
+}
+elseif(isset($_POST['n_type'])){
+	$add = $link -> query("INSERT INTO type_t (t_name) VALUES('".$_POST['n_type']."')");
+	if (!$add){
+		echo "Did not work";
+	}
+	else{
+		echo "New activity TYPE successfully added to the database";
+	}
+}
+elseif(isset($_POST['n_goal'])){
+	$add = $link -> query("INSERT INTO goal_t (g_name) VALUES('".$_POST['n_goal']."')");
+	if (!$add){
+		echo "Did not work";
+	}
+	else{
+		echo "New activity GOAL successfully added to the database";
+	}
+}
+else{
+	echo "ERROR: Nothing added to the database.";
+}
+?>
+
 </CENTER>
 
       <footer class="footer">

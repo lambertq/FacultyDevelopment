@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -11,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
-    <title>Faculty Tracking</title>
+    <title>Result</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,10 +47,25 @@
 	<h1>Home Directory</h1>
       <div class="jumbotron">
         <p class="lead">
+		<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+			or die(mysql_connect_error("Connection Failed"));
+			
+		if (isset($_POST['bnumber'])
+		$add = $link -> query("INSERT INTO faculty VALUES('$bnumber', '$title', '$firstname', '$mi', '$lastname', '$email', '$cpo',
+		'$ethnicity', '$gender', '$status', '$rank')");
 		
+		if (!$add)
+		{
+		echo "Query Failed";
+		}
 		
+		else
+		{
+		echo "Faculty successfully added to database";
+		}
 		
-		
+		?>
+			
       </div>
 </CENTER>
 

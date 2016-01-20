@@ -4,6 +4,12 @@ or die(mysql_connect_error("Connection Failed"));
 
 <!DOCTYPE html>
 
+<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -40,6 +46,7 @@ or die(mysql_connect_error("Connection Failed"));
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="homestyles.php">Home</a></li>
+			<li role="presentation" class="active"><a href="logout.php">Log Out</a></li>
             <!--<li role="presentation"><a href="#">About</a></li>-->
             <!--<li role="presentation"><a href="#">Contact</a></li>-->
           </ul>
@@ -65,7 +72,8 @@ or die(mysql_connect_error("Connection Failed"));
 				//populate drop down list with all faculty in the database by name
 				?><!--end php and start the form for the drop down-->
 				<form action = "singleresult.php" method = "post">
-				<h4>Faculty Member:</h4> <select name="fsel">
+				<h4>Faculty Member:</h4> <select name="fsel" required>
+				<option value="" selected = "selected" disabled = "disabled">Choose a Faculty Member</option>
 				<?php
 				while($row = $query -> fetch_array()){
 					$name = ("".$row['firstname']." ".$row['mi']." ".$row['lastname']."");
@@ -73,7 +81,7 @@ or die(mysql_connect_error("Connection Failed"));
 				}
 				?>
 				</select>
-				<input type = "submit" />
+				<input class="btn-group btn-primary btn-sm" type = "Submit">
 				</form>
 				<?php
 			
@@ -86,14 +94,15 @@ or die(mysql_connect_error("Connection Failed"));
 				//populate drop down list with all activities in the database by name
 				?><!--end php and start the form for the drop down-->
 				<form action = "singleresult.php" method = "post">
-				<h4>Activity:</h4> <select name="asel">
+				<h4>Activity:</h4> <select name="asel" required>
+				<option selected="selected" disabled="disabled" value="">Select an Activity</option>
 				<?php
 				while($row = $query -> fetch_array()){
 					echo "<option value='" . $row['ID'] . "'>" . $row['Title'] . "</option>";
 				}
 				?>
 				</select>
-				<input type = "submit" />
+				<input class="btn-group btn-primary btn-sm" type = "Submit">
 				</form>
 				<?php
 				

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -7,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Yo">
+    <meta name="author" content="Quinten">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
-    <title>Faculty Tracking</title>
+	
+	<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
+	
+    <title>Add Activity</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,14 +51,26 @@
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
-	<h1>Home Directory</h1>
-      <div class="jumbotron">
+<div class="jumbotron">
         <p class="lead">
-		
-		
-		
-		
-      </div>
+<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+or die(mysql_connect_error("Connection Failed"));
+$ID = $_POST["a_ID"];
+$delrel = $link -> query("DELETE FROM Attendance WHERE '$ID' = Attendance.a_ID");
+$delact = $link -> query("DELETE FROM Activities_t WHERE '$ID' = Activities_t.ID");
+if (!$delrel)
+{
+	echo "Relation did not delete";
+}
+else if (!$delact)
+{
+	echo "Activity did not delete";
+}
+else
+{
+	echo "Activity successfully removed from the database";
+}
+?>
 </CENTER>
 
       <footer class="footer">

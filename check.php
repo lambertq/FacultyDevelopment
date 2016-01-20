@@ -3,9 +3,10 @@ session_start();
 error_reporting(0);
 
 if (isset($_POST['submit'])) {
+	
+		
 
-		$username=$_POST['username'];
-		$password=$_POST['password'];
+		if ($username=$_POST['username'] and $password=$_POST['password']);{
 
 		$myseli = NEW MySQLi('localhost', 'development', 'leslie', 'development') or die(mysql_error('Could not establish connection'));
 
@@ -35,9 +36,12 @@ if (isset($_POST['submit'])) {
 
 				header("location: index.php");
 				}
+		}
+		else{
+				$error = "Username or Password is invalid";
+		}
 
 
 
 }
-
 ?>

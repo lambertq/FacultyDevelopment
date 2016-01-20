@@ -1,5 +1,4 @@
-<?php
-$link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
 or die(mysql_connect_error("Connection Failed"));
 ?>
 
@@ -15,10 +14,17 @@ or die(mysql_connect_error("Connection Failed"));
     <meta name="author" content="">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
+	<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
+	
     <title>Faculty Tracking</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/tables.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
@@ -36,11 +42,12 @@ or die(mysql_connect_error("Connection Failed"));
   
   <body>
 
-    <div class="containresult">
+    <div class="container">
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="homestyles.php">Home</a></li>
+			<li role="presentation" class="active"><a href="logout.php">Log Out</a></li>
             <!--<li role="presentation"><a href="#">About</a></li>-->
             <!--<li role="presentation"><a href="#">Contact</a></li>-->
           </ul>
@@ -48,11 +55,11 @@ or die(mysql_connect_error("Connection Failed"));
         <h3 class="text-muted">Faculty Development</h3>
       </div>
 <CENTER>
-<<<<<<< HEAD
 	<h1>Result Page</h1>
       <div class="jumbotron">
         <p class="lead">
-		<table border=1><tbody>
+		<div class = "table-responsive tables"><!--start the table response class-->
+		<table class = "table-striped table-condensed table-hover tables" cellspacing ="10" align = "center" border = 1><tbody>
 
 		<?php
 //==============================================================================================================================================//
@@ -61,19 +68,24 @@ or die(mysql_connect_error("Connection Failed"));
 		$numresults = 0;
 		error_reporting(0);
 		if (isset($_POST['fsel'])){
+			echo "<h3> Professor Searched: </h3>";
 			$profid = $_POST['fsel'];
 			////////////////////////////////////////////////////////////////////////////////
-			$query = $link -> query("SELECT * FROM faculty, gender_T, status_T, rank_T, ethnicity_T
-										 WHERE faculty.ethnicity = ethnicity_T.ethnicityID
+			$query = $link -> query("SELECT * FROM faculty, academic_p, gender_T, status_T, rank_T, ethnicity_T
+										 WHERE faculty.program = academic_p.ID
+										 AND faculty.ethnicity = ethnicity_T.ethnicityID
 										 AND faculty.gender = gender_T.genderID
 										 AND faculty.status = status_T.statusID
 										 AND faculty.rank = rank_T.rankID
 										 AND faculty.bnumber = '$profid'");
 			////////////////////////////////////////////////////////////////////////////////
 			if ($query -> num_rows !=0){
-				echo("<tr><th> BNumber </th><th> Title </th><th> First Name </th>
-					  <th> MI </th><th> Last Name </th><th> Email </th><th> CPO </th>
-					  <th> Ethinicity </th><th> Gender </th><th> Status </th><th> Rank </th></tr>");
+				echo("<tr><td align='center'><b>BNumber</b></td><td align='center'><b>Title</b></td>
+					<td align='center'><b>First Name</b></td><td align='center'><b> MI </b></td>
+					<td align='center'><b>Last Name </b></td><td align='center'><b>Email</b></td>
+					<td align='center'><b>CPO </b></td><td align='center'><b> Academic Program </b></td>
+					<td align='center'><b> Division </b></td><td align='center'><b> Ethinicity </b></td>
+					<td align='center'><b> Gender </b></td><td align='center'><b> Status </b></td><td align='center'><b> Rank </b></td></tr>");
 				while($row = $query -> fetch_array()){
 					$bnum = $row['bnumber'];
 					$title = $row['title'];
@@ -82,13 +94,17 @@ or die(mysql_connect_error("Connection Failed"));
 					$lname = $row['lastname'];
 					$email = $row['email'];
 					$cpo = $row['cpo'];
+					$prog = $row['ap_name'];
+					$div = $row['division'];
 					$ethnicity = $row['ename'];
 					$gender = $row['gname'];
 					$status = $row['sname'];
 					$rank = $row['rname'];
-					echo "<tr><th>".$bnum."</th><th>".$title."</th><th>".$fname."</th><th>".$mi."</th>
-					<th>".$lname."</th><th>".$email."</th><th>".$cpo."</th><th>".$ethnicity."</th>
-					<th>".$gender."</th><th>".$status."</th><th>".$rank."</th></tr>\n";
+					echo "<tr><td align='center'>".$bnum."</td><td align='center'>".$title."</td>
+					<td align='center'>".$fname."</td><td align='center'>".$mi."</td><td align='center'>".$lname."</td>
+					<td align='center'>".$email."</td><td align='center'>".$cpo."</td><td align='center'>".$prog."</td>
+					<td align='center'>".$div."</td><td align='center'>".$ethnicity."</td><td align='center'>".$gender."</td>
+					<td align='center'>".$status."</td><td align='center'>".$rank."</td></tr>\n";
 				}
 			}
 		}
@@ -105,23 +121,49 @@ or die(mysql_connect_error("Connection Failed"));
 										AND Activities_t.ID = '$actID'");
 			////////////////////////////////////////////////////////////////////////////////
 			if ($query -> num_rows !=0){
-				echo("<tr><th>Title</th><th>Date</th><th>Location</th>
-					  <th>Type</th><th>Goal</th><th>Description</th><th>Narrative</th></tr>");
-				while($row = $query -> fetch_array()){
-					$title = $row['Title'];
-					$date = $row['Date'];
-					$location = $row['name'];
-					$type = $row['t_name'];
-					$goal = $row['g_name'];
-					$description = $row['Description'];
-					$narrative = $row['Narrative'];
-					echo ("<tr><th>".$title."</th><th>".$date."</th><th>".$location."</th><th>".$type."</th>
-					<th>".$goal."</th><th>".$description."</th><th>".$narrative."</th></tr>\n");
-				}
+				echo("<tr><td align='center'><b>Title</b></td><td align='center'><b>Date</b></td>
+						<td align='center'><b>Time</b></td><td align='center'><b>Location</b></td>
+					    <td align='center'><b>Type</b></td><td align='center'><b>Goal</b></td></tr>");
+					while($row = $query -> fetch_array()){
+						$title = $row['Title'];
+						$dcon = DateTime::createFromFormat('Y-m-d', $row['Date']);
+						$date = $dcon->format('M/d/Y');
+						$tcon = DateTime::createFromFormat('G:i:s', $row['Time']);
+						$time = $tcon->format('g:iA');
+						$location = $row['name'];
+						$type = $row['t_name'];
+						$goal = $row['g_name'];
+						$description = $row['Description'];
+						$narrative = $row['Narrative'];
+						echo ("<tr><td align='center'>".$title."</td><td align='center'>".$date."</td>
+						<td align='center'>".$time."</td><td align='center'>".$location."</td>
+						<td align='center'>".$type."</td><td align='center'>".$goal."</td></tr>\n");
+					}
+				echo "</tbody></table>";
+				echo "<br />";
+				echo "<br />";
+				echo "<CENTER>";
+				?>
+				<table class = "table-striped table-condensed tables" border=1><tbody>
+				<?php
+				echo "<tr><td align='center'><b>Description<b/></td></tr>";
+				echo "<tr><td align = 'center'>".$description."</td></tr>";
+				echo "</tbody></table>";
+				echo "</CENTER>";
+				echo "<br />";
+				echo "<br />";
+				echo "<CENTER>";
+				?>
+				<table class = "table-striped table-condensed tables" border=1><tbody>
+				<?php
+				echo "<tr><td align = 'center'><b>Narrative</b></td></tr>";
+				echo "<tr><td align = 'center'>".$narrative."</td></tr>";
+				echo "</tbody></table";
+				echo "</CENTER>";
 			}
 		}
 //==============================================================================================================================================//
-//			
+//
 //==============================================================================================================================================//			
 		elseif (isset($_POST['PageChange'])){//checks if from homepage 
 			$homeclick = $_POST['PageChange'];//pulls a variable to see if from the home page
@@ -132,19 +174,25 @@ or die(mysql_connect_error("Connection Failed"));
 											AND Activities_t.Type = type_t.ID
 											AND Activities_t.Goal = goal_t.ID");
 				////////////////////////////////////////////////////////////////////////////////
+				?>
+				<table class = "table table-condensed table-hover table-striped tables" border=1><tbody>
+				<?php
 				if ($query -> num_rows !=0){
-					echo("<tr><th>Title</th><th>Date</th><th>Location</th>
-					      <th>Type</th><th>Goal</th><th>Description</th><th>Narrative</th></tr>");
+					echo("<tr><td align='center'><b>Title</b></td><td align='center'><b>Date</b></td>
+						<td align='center'><b>Time</b></td><td align='center'><b>Location</b></td>
+					    <td align='center'><b>Type</b></td><td align='center'><b>Goal</b></td></tr>");
 					while($row = $query -> fetch_array()){
 						$title = $row['Title'];
-						$date = $row['Date'];
+						$dcon = DateTime::createFromFormat('Y-m-d', $row['Date']);
+						$date = $dcon->format('M/d/Y');
+						$tcon = DateTime::createFromFormat('G:i:s', $row['Time']);
+						$time = $tcon->format('g:iA');
 						$location = $row['name'];
 						$type = $row['t_name'];
 						$goal = $row['g_name'];
-						$description = $row['Description'];
-						$narrative = $row['Narrative'];
-						echo ("<tr><th>".$title."</th><th>".$date."</th><th>".$location."</th><th>".$type."</th>
-						<th>".$goal."</th><th>".$description."</th><th>".$narrative."</th></tr>\n");
+						echo ("<tr><td align='center'>".$title."</td><td align='center'>".$date."</td>
+						<td align='center'>".$time."</td><td align='center'>".$location."</td>
+						<td align='center'>".$type."</td><td align='center'>".$goal."</td></tr>\n");
 					}
 				}
 			}
@@ -153,17 +201,21 @@ or die(mysql_connect_error("Connection Failed"));
 //==============================================================================================================================================//	
 			if ($homeclick == "View All Faculty"){
 				////////////////////////////////////////////////////////////////////////////////////////
-				$query = $link -> query("SELECT * FROM faculty, gender_T, status_T, rank_T, ethnicity_T
-										 WHERE faculty.ethnicity = ethnicity_T.ethnicityID
+				$query = $link -> query("SELECT * FROM faculty, academic_p, gender_T, status_T, rank_T, ethnicity_T
+										 WHERE faculty.program = academic_p.ID
+										 AND faculty.ethnicity = ethnicity_T.ethnicityID
 										 AND faculty.gender = gender_T.genderID
 										 AND faculty.status = status_T.statusID
 										 AND faculty.rank = rank_T.rankID");
 				////////////////////////////////////////////////////////////////////////////////////////
 				if ($query -> num_rows != 0){
 					//identifying line of the table
-					echo("<tr><th> BNumber </th><th> Title </th><th> First Name </th>
-						  <th> MI </th><th> Last Name </th><th> Email </th><th> CPO </th>
-						  <th> Ethinicity </th><th> Gender </th><th> Status </th><th> Rank </th></tr>");
+					echo("<tr><td align='center'><b>BNumber</b></td><td align='center'><b>Title</b></td>
+					<td align='center'><b>First Name</b></td><td align='center'><b> MI </b></td>
+					<td align='center'><b>Last Name </b></td><td align='center'><b>Email</b></td>
+					<td align='center'><b>CPO </b></td><td align='center'><b> Academic Program </b></td>
+					<td align='center'><b> Division </b></td><td align='center'><b> Ethinicity </b></td>
+					<td align='center'><b> Gender </b></td><td align='center'><b> Status </b></td><td align='center'><b> Rank </b></td></tr>");
 					while($row = $query -> fetch_array()){
 						$bnum = $row['bnumber'];
 						$title = $row['title'];
@@ -172,58 +224,20 @@ or die(mysql_connect_error("Connection Failed"));
 						$lname = $row['lastname'];
 						$email = $row['email'];
 						$cpo = $row['cpo'];
+						$prog = $row['ap_name'];
+						$div = $row['division'];
 						$ethnicity = $row['ename'];
 						$gender = $row['gname'];
 						$status = $row['sname'];
 						$rank = $row['rname'];
-						echo "<tr><th>".$bnum."</th><th>".$title."</th><th>".$fname."</th><th>".$mi."</th>
-						<th>".$lname."</th><th>".$email."</th><th>".$cpo."</th><th>".$ethnicity."</th>
-						<th>".$gender."</th><th>".$status."</th><th>".$rank."</th></tr>\n";
+						echo "<tr><td align='center'>".$bnum."</td><td align='center'>".$title."</td>
+						<td align='center'>".$fname."</td><td align='center'>".$mi."</td><td align='center'>".$lname."</td>
+						<td align='center'>".$email."</td><td align='center'>".$cpo."</td><td align='center'>".$prog."</td>
+						<td align='center'>".$div."</td><td align='center'>".$ethnicity."</td><td align='center'>".$gender."</td>
+						<td align='center'>".$status."</td><td align='center'>".$rank."</td></tr>\n";
 					}
 				}
 			}
-=======
-<h1> Result Page </h1>
-<table border=1><tbody>
-
-<?php
-$homeclick = $_POST['PageChange'];
-if ($homeclick == "View All Activities"){
-	echo("<tr><th>Title</th><th>Date</th><th>Location</th><th>Type</th><th>Goal</th><th>Description</th><th>Narrative</th></tr>");
-
-	$query = $link -> query("SELECT * FROM Activities_t, location_t, type_t, goal_t
-								WHERE Activities_t.Location = location_t.ID
-								AND Activities_t.Type = type_t.ID
-								AND Activities_t.Goal = goal_t.ID");
-	if ($query -> num_rows !=0){
-		while($row = $query -> fetch_array()){
-			$title = $row['Title'];
-			$date = $row['Date'];
-			$location = $row['name'];
-			$type = $row['t_name'];
-			$goal = $row['g_name'];
-			$description = $row['Description'];
-			$narrative = $row['Narrative'];
-			echo "<tr><th>".$title."</th><th>".$date."</th><th>".$location."</th><th>".$type."</th>
-			<th>".$goal."</th><th>".$description."</th><th>".$narrative."</th></tr>\n";
-		}
-	}
-}if ($homeclick == "View All Faculty"){
-	echo("<tr><th>Title</th><th>Date</th><th>Location</th><th>Type</th><th>Goal</th><th>Description</th><th>Narrative</th></tr>");
-
-	$query = $link -> query("SELECT * FROM Faculty_Placeholder");
-	if ($query -> num_rows !=0){
-		while($row = $query -> fetch_array()){
-			$title = $row['Title'];
-			$date = $row['Date'];
-
-			$type = $row['Type'];
-			$goal = $row['Goal'];
-			$description = $row['Description'];
-			$narrative = $row['Narrative'];
-			echo "<tr><th>".$title."</th><th>".$date."</th><th>".$location."</th><th>".$type."</th>
-			<th>".$goal."</th><th>".$description."</th><th>".$narrative."</th></tr>\n";
->>>>>>> 01537267ebf0d1bdd1b2a76b88355863d0c5be3d
 		}
 //==============================================================================================================================================//
 //
@@ -232,8 +246,106 @@ if ($homeclick == "View All Activities"){
 			echo "<h3>Invalid Access Route.<br />  Please click the home button to return to the home page.</h3>";
 		}
 		
-
-<<<<<<< HEAD
+/////////////////////////////////
+		?>
+		</tbody></table>
+		</div>
+<!--
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
+-->	
+		<div class = "table-responsive">
+		<table class = "table-striped table-condensed tables" align="center" border=1><tbody>
+		<?php
+		$numresults = 0;
+		error_reporting(0);
+		if (isset($_POST['fsel'])){
+			echo "<h3> Activities Attended: </h3>";
+			$profid = $_POST['fsel'];
+			////////////////////////////////////////////////////////////////////////////////
+			$relquery = $link -> query("SELECT * FROM Attendance, Activities_t, location_t,
+										goal_t, type_t WHERE Attendance.f_ID = '$profid' 
+										AND Activities_t.ID = Attendance.a_ID
+										AND Activities_t.Location = location_t.ID
+										AND Activities_t.Type = type_t.ID
+										AND Activities_t.Goal = goal_t.ID"); 
+			///////////////////////////////////////////////////////////////////////////////////
+			if ($relquery -> num_rows !=0){
+				$thetable = "";
+				$numtimes = 0;
+						echo("<tr><td align='center'><b>Title</b></td><td align='center'><b>Date</b></td>
+						<td align='center'><b>Time</b></td><td align='center'><b>Location</b></td>
+					    <td align='center'><b>Type</b></td><td align='center'><b>Goal</b></td></tr>");
+					while($row = $relquery -> fetch_array()){
+						$title = $row['Title'];
+						$dcon = DateTime::createFromFormat('Y-m-d', $row['Date']);
+						$date = $dcon->format('M/d/Y');
+						$tcon = DateTime::createFromFormat('G:i:s', $row['Time']);
+						$time = $tcon->format('g:iA');
+						$location = $row['name'];
+						$type = $row['t_name'];
+						$goal = $row['g_name'];
+						$thetable = $thetable."<tr><td align='center'>".$title."</td><td align='center'>".$date."</td>
+						<td align='center'>".$time."</td><td align='center'>".$location."</td>
+						<td align='center'>".$type."</td><td align='center'>".$goal."</td></tr>\n";
+						$numtimes++;
+					}
+				}
+				echo "".$numtimes." activities attended.";
+				echo $thetable;
+			}	
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
+		elseif (isset($_POST['asel'])){
+			echo "<h3> Faculty Members that Attended: </h3>";
+			$actID = $_POST['asel'];
+			$query = $link -> query("SELECT * FROM faculty, academic_p, gender_T, status_T, rank_T, ethnicity_T, Attendance
+										 WHERE Attendance.a_ID = '$actID'
+										 AND faculty.bnumber = Attendance.f_ID
+										 AND faculty.program = academic_p.ID
+										 AND faculty.ethnicity = ethnicity_T.ethnicityID
+										 AND faculty.gender = gender_T.genderID
+										 AND faculty.status = status_T.statusID
+										 AND faculty.rank = rank_T.rankID");
+			////////////////////////////////////////////////////////////////////////////////
+			if ($query -> num_rows !=0){
+				$thetable = "";
+				$numtimes = 0;
+				echo("<tr><td align='center'><b>BNumber</b></td><td align='center'><b>Title</b></td>
+				<td align='center'><b>First Name</b></td><td align='center'><b> MI </b></td>
+				<td align='center'><b>Last Name </b></td><td align='center'><b>Email</b></td>
+				<td align='center'><b>CPO </b></td><td align='center'><b> Academic Program </b></td>
+				<td align='center'><b> Division </b></td><td align='center'><b> Ethinicity </b></td>
+				<td align='center'><b> Gender </b></td><td align='center'><b> Status </b></td><td align='center'><b> Rank </b></td></tr>");
+				while($row = $query -> fetch_array()){
+					$bnum = $row['bnumber'];
+					$title = $row['title'];
+					$fname = $row['firstname'];
+					$mi = $row['mi'];
+					$lname = $row['lastname'];
+					$email = $row['email'];
+					$cpo = $row['cpo'];
+					$prog = $row['ap_name'];
+					$div = $row['division'];
+					$ethnicity = $row['ename'];
+					$gender = $row['gname'];
+					$status = $row['sname'];
+					$rank = $row['rname'];
+					echo "<tr><td align='center'>".$bnum."</td><td align='center'>".$title."</td>
+					<td align='center'>".$fname."</td><td align='center'>".$mi."</td><td align='center'>".$lname."</td>
+					<td align='center'>".$email."</td><td align='center'>".$cpo."</td><td align='center'>".$prog."</td>
+					<td align='center'>".$div."</td><td align='center'>".$ethnicity."</td><td align='center'>".$gender."</td>
+					<td align='center'>".$status."</td><td align='center'>".$rank."</td></tr>\n";
+					$numtimes++;
+				}echo "".$numtimes." faculty member(s) attended.";
+				echo $thetable;
+			}
+		}
+//==============================================================================================================================================//
+//
+//==============================================================================================================================================//	
 		?>
 		</tbody></table>
       </div>
@@ -249,9 +361,4 @@ if ($homeclick == "View All Activities"){
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
-=======
-?>
-</tbody></table>
-</body>
->>>>>>> 01537267ebf0d1bdd1b2a76b88355863d0c5be3d
 </html>

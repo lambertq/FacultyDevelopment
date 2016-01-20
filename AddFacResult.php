@@ -11,7 +11,14 @@
     <meta name="author" content="">
     <link rel="icon" href="https://www.higheredjobs.com/images/AccountImages/4698_1.jpg">
 
-    <title>Faculty Tracking</title>
+	
+	<?php
+	//check if the user has come from the login or not//
+	include('session.php');
+	////////////////////////////////////////////////////
+	?>
+	
+    <title>Result</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,10 +55,37 @@
 	<h1>Home Directory</h1>
       <div class="jumbotron">
         <p class="lead">
+		<?php $link = NEW MySQLi('localhost', 'development', 'leslie', 'development')
+			or die(mysql_connect_error("Connection Failed"));
+			
+		$bnumber = $_POST['bnumber'];
+		$title = $_POST['title'];
+		$firstname = $_POST['firstname'];
+		$mi = $_POST['mi'];
+		$lastname = $_POST['lastname'];
+		$email = $_POST['email'];
+		$cpo = $_POST['cpo'];
+		$pro = $_POST['program'];
+		$ethnicity = $_POST['ethnicity'];
+		$gender = $_POST['gender'];
+		$status = $_POST['status'];
+		$rank = $_POST['rank'];
 		
+		$add = $link -> query("INSERT INTO faculty VALUES('$bnumber', '$title', '$firstname', '$mi', '$lastname', '$email', '$cpo',
+		'$pro', '$ethnicity', '$gender', '$status', '$rank')");
 		
+		if (!$add)
+		{
+		echo "Query Failed";
+		}
 		
+		else
+		{
+		echo "Faculty successfully added to database";
+		}
 		
+		?>
+			
       </div>
 </CENTER>
 
