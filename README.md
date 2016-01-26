@@ -1,6 +1,8 @@
 # FacultyDevelopment
 Faculty Development Database Berea College
 
+Languages used in this team project: SQL, HTML, CSS, Javascript, and PHP. 
+
 This class was a focus on a team building assignment that allowed us as students to get experience working with people
 in the real world. My group of 4 was given a choice of 5 different projects to undertake and we as a group decided to take on the
 Berea College's Faculty Development project.
@@ -12,6 +14,6 @@ We worked with our client to get exactly what they wanted in the program and set
 half of the semester. My specific role in the group was to be a facilitator to control our time management as a group, as 
 well as setting up meetings with our client on a normal basis. 
 
-Within the group I primarily worked on the front end of the project with HTML, CSS, very little javascript, and PHP.
+Within the group I primarily worked on the front end of the project. This helped me get some hands on experience with HTML, CSS, very little javascript, and PHP.
 
 Contact me if there are any questions about our project. Thanks.
